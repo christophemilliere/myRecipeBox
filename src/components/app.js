@@ -32,10 +32,15 @@ class App extends React.Component {
 		this.setState({ recettes });
 	}
 	addRecette = (recette) => {
-		console.log(' add recette', recette);
 		const recettes = {...this.state.recettes}
 		const timestamp = Date.now();
 		recettes[`recette-${timestamp}`] = recette
+		
+	}
+
+	deleteRecipe = ( key ) => {
+		const recettes = {...this.state.recettes};
+		recettes[key] = null;
 		this.setState({recettes});
 	}
 	render(){
@@ -50,7 +55,9 @@ class App extends React.Component {
 					recettes={this.state.recettes}
 					loadingRecetteEx={this.loadingRecetteEx} 
 					addRecette={this.addRecette} 
-					updateRecipe={this.updateRecipe} />
+					updateRecipe={this.updateRecipe} 
+					deleteRecipe={this.deleteRecipe} 
+					pseudo={this.props.params.pseudo}/>
 			</div>
 		)
 	}
